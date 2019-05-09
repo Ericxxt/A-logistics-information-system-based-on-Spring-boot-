@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: tangtang1w
+    url: jdbc:mysql://localhost:3306/logistics_database?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  type-aliases-package: com.ericxxt.logistics_system.entity
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="eric">
+<head>
+    <title>订单创建</title>
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome css -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
+    <!-- meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Interiors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //meta tags -->
+    <!--fonts-->
+    <link href="http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&subset=latin-ext" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!--//fonts-->
+</head>
+<body>
+<!-- header -->
+<header>
+    <div class="container">
+        <!-- nav -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo">
+                        <h1><a href="index.html">速通</a></h1>
+                    </div>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">主页</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                        <#--<li><a href="gallery.html">公司故事</a></li>-->
+                        <li class="dropdown">
+                            <#if Session["user"]?exists> <a>${Session.user.username}</a><#else><a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注册<b class="caret"></b></a></#if>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/to_login"><span class="glyphicon glyphicon-user"></span>用户登录</a></li>
+                            <li><a href="/manager/to_login"><span class="glyphicon glyphicon-star">管理人员登录</a></li>
+                        </ul>
+                        </li>
+                        <#--<li><a href="blog.html">Blog</a></li>-->
+                        <#--<li><a href="contact.html">Contact</a></li>-->
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- //nav -->
+    </div>
+</header>
+<!-- //header -->
+<div class="container-fluid">
+
+</div>
+</body>
+
+
+<!--script-->
+<script type="text/javascript" src="/static/js/jquery-2.1.4.min.js"></script><!-- Required-js -->
+<script src="/static/js/bootstrap.min.js"></script><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- main slider-banner -->
+<script type="text/javascript" src="/static/js/jquery.mkinfinite.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.w3layouts-slider').mkinfinite({
+            maxZoom:       1.4,
+            animationTime: 4000,
+            imagesRatio:   (960 / 720),
+            isFixedBG:     true,
+            zoomIn:        true,
+            imagesList:    new Array(
+                '/images/11.jpg',
+                '/images/22.jpg',
+                '/images/33.jpg',
+                '/images/44.jpg',
+                '/images/55.jpg'
+            )
+        });
+    });
+</script>
+<!-- //main slider-banner -->
+<!-- what we do hover effect -->
+<script type="text/javascript" src="/static/js/jquery.iconmenu.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#sti-menu').iconmenu();
+    });
+</script>
+<!-- //what we do hover effect -->
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+</script>
+</html>

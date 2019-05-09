@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ericxxt.logistics_system.dao.OrderDao">
+
+    <resultMap id="order" type="com.ericxxt.logistics_system.entity.Order">
+        <result column="order_id" jdbcType="INTEGER" property="order_id" />
+        <result column="order_name" jdbcType="VARCHAR" property="order_name" />
+        <result column="order_type" jdbcType="VARCHAR" property="order_type" />
+
+        <result column="sender_id" jdbcType="INTEGER" property="sender_id" />
+        <result column="sender_name" jdbcType="VARCHAR" property="sender_name" />
+        <result column="sender_province" jdbcType="VARCHAR" property="sender_province" />
+        <result column="sender_city" jdbcType="VARCHAR" property="sender_city" />
+        <result column="sender_area" jdbcType="VARCHAR" property="sender_area" />
+        <result column="sender_address" jdbcType="VARCHAR" property="sender_address" />
+        <result column="sender_phone" jdbcType="VARCHAR" property="sender_phone" />
+
+        <result column="receiver_id" jdbcType="INTEGER" property="receiver_id" />
+        <result column="receiver_name" jdbcType="VARCHAR" property="receiver_name" />
+        <result column="receiver_province" jdbcType="VARCHAR" property="receiver_province" />
+        <result column="receiver_city" jdbcType="VARCHAR" property="receiver_city" />
+        <result column="receiver_area" jdbcType="VARCHAR" property="receiver_area" />
+        <result column="receiver_address" jdbcType="VARCHAR" property="receiver_address" />
+        <result column="receiver_phone" jdbcType="VARCHAR" property="receiver_phone" />
+
+        <result column="manager_id" jdbcType="VARCHAR" property="manager_id" />
+        <result column="deliver_id" jdbcType="VARCHAR" property="deliver_id" />
+        <result column="initial_time" jdbcType="TIMESTAMP" property="initial_time" />
+        <result column="live_time" jdbcType="VARCHAR" property="live_time" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="price" jdbcType="VARCHAR" property="price" />
+        <result column="volume" jdbcType="VARCHAR" property="volume" />
+        <result column="trans_info" jdbcType="VARCHAR" property="trans_info" />
+    </resultMap>
+
+    <select id="selectOrder" resultMap="order">
+        select order_id, order_name, order_type, sender_id, sender_name, sender_province, sender_city, sender_area, sender_address, sender_phone, receiver_id, receiver_name, receiver_province, receiver_city, receiver_area, receiver_address, receiver_phone, manager_id, deliver_id, DATE_FORMAT(initial_time,'%Y-%m-%d %H:%i:%s') as initial_time, live_time, status, price, volume, trans_info
+ from orders where order_id=#{order_id}
+    </select>
+
+    <select id="user_Orders" resultMap="order">
+        select order_id, order_name, order_type, sender_id, sender_name, sender_province, sender_city, sender_area, sender_address, sender_phone, receiver_id, receiver_name, receiver_province, receiver_city, receiver_area, receiver_address, receiver_phone, manager_id, deliver_id, DATE_FORMAT(initial_time,'%Y-%m-%d %H:%i:%s') as initial_time, live_time, status, price, volume, trans_info
+         from orders where sender_id=#{user_id}
+    </select>
+
+    <select id="unview_Orders" resultMap="order">
+        select order_id, order_name, order_type, sender_id, sender_name, sender_province, sender_city, sender_area, sender_address, sender_phone, receiver_id, receiver_name, receiver_province, receiver_city, receiver_area, receiver_address, receiver_phone, manager_id, deliver_id, DATE_FORMAT(initial_time,'%Y-%m-%d %H:%i:%s') as initial_time, live_time, status, price, volume, trans_info
+         from orders where status='待审核'
+    </select>
+
+    <select id="manager_Orders" resultMap="order">
+        select order_id, order_name, order_type, sender_id, sender_name, sender_province, sender_city, sender_area, sender_address, sender_phone, receiver_id, receiver_name, receiver_province, receiver_city, receiver_area, receiver_address, receiver_phone, manager_id, deliver_id, DATE_FORMAT(initial_time,'%Y-%m-%d %H:%i:%s') as initial_time, live_time, status, price, volume, trans_info
+         from orders where manager_id=#{manager_id}
+    </select>
+
+    <select id="deliver_Orders" resultMap="order">
+        select order_id, order_name, order_type, sender_id, sender_name, sender_province, sender_city, sender_area, sender_address, sender_phone, receiver_id, receiver_name, receiver_province, receiver_city, receiver_area, receiver_address, receiver_phone, manager_id, deliver_id, DATE_FORMAT(initial_time,'%Y-%m-%d %H:%i:%s') as initial_time, live_time, status, price, volume, trans_info
+        from orders where deliver_id=#{deliver_id}
+    </select>
+
+    <!--<insert id="insert" parameterType="com.example.entity.User">
+        insert into User (userId, userName, phone,
+        sex)
+        values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="findAllUser" resultType="com.example.entity.User">
+        select * from User
+    </select>-->
+
+
+    <update id="update_news">
+        update manager set news='true' where manager_id=#{manager_id}
+    </update>
+
+    <!--parameterType="com.ericxxt.logistics_system.entity.Order"-->
+    <insert id="insertOrder" parameterType="com.ericxxt.logistics_system.entity.Order">
+        insert into orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="order_name != null">
+                order_name,
+            </if>
+            <if test="order_type != null">
+                order_type,
+            </if>
+            <if test="sender_id != null">
+                sender_id,
+            </if>
+            <if test="sender_name != null">
+                sender_name,
+            </if>
+
+            <if test="sender_province != null">
+                sender_province,
+            </if>
+            <if test="sender_city != null">
+                sender_city,
+            </if>
+            <if test="sender_area != null">
+                sender_area,
+            </if>
+            <if test="sender_address != null">
+                sender_address,
+            </if>
+
+
+
+            <if test="sender_phone != null">
+                sender_phone,
+            </if>
+            <if test="receiver_id != null">
+                receiver_id,
+            </if>
+            <if test="receiver_name != null">
+                receiver_name,
+            </if>
+            <if test="receiver_province != null">
+                receiver_province,
+            </if>
+
+            <if test="receiver_city != null">
+                receiver_city,
+            </if>
+            <if test="receiver_area != null">
+                receiver_area,
+            </if>
+            <if test="receiver_address != null">
+                receiver_address,
+            </if>
+            <if test="receiver_phone != null">
+                receiver_phone,
+            </if>
+
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="order_name != null">
+                #{order_name,jdbcType=VARCHAR},
+            </if>
+            <if test="order_type != null">
+                #{order_type,jdbcType=VARCHAR},
+            </if>
+            <if test="sender_id != null">
+                #{sender_id,jdbcType=INTEGER},
+            </if>
+            <if test="sender_name != null">
+                #{sender_name,jdbcType=VARCHAR},
+            </if>
+
+
+            <if test="sender_province != null">
+                #{sender_province,jdbcType=VARCHAR},
+            </if>
+            <if test="sender_city != null">
+                #{sender_city,jdbcType=VARCHAR},
+            </if>
+            <if test="sender_area != null">
+                #{sender_area,jdbcType=VARCHAR},
+            </if>
+            <if test="sender_address != null">
+                #{sender_address,jdbcType=VARCHAR},
+            </if>
+
+            <if test="sender_phone != null">
+                #{sender_phone,jdbcType=VARCHAR},
+            </if>
+            <if test="receiver_id != null">
+                #{receiver_id,jdbcType=INTEGER},
+            </if>
+            <if test="receiver_name != null">
+                #{receiver_name,jdbcType=VARCHAR},
+            </if>
+            <if test="receiver_province != null">
+                #{receiver_province,jdbcType=VARCHAR},
+            </if>
+
+
+            <if test="receiver_city != null">
+                #{receiver_city,jdbcType=VARCHAR},
+            </if>
+            <if test="_parameter != null">
+                #{receiver_area,jdbcType=VARCHAR},
+            </if>
+            <if test="_parameter != null">
+                #{receiver_address,jdbcType=VARCHAR},
+            </if>
+            <if test="_parameter != null">
+                #{receiver_phone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteOrder">
+        delete from order where order_id=#{order_id}
+    </delete>
+
+    <update id="updateOrder">
+        update order set manager_id=#{order.manager_id},deliver_id=#{order.deliver_id}
+        ,live_time=#{order.live_time},status=#{order.status},volume=#{order.volume}
+        ,trans_info=#{order.trans_info}
+    </update>
+</mapper>

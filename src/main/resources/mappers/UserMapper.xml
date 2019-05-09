@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ericxxt.logistics_system.dao.UserDao">
+
+    <resultMap id="user" type="com.ericxxt.logistics_system.entity.User">
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
+        <result column="area" jdbcType="VARCHAR" property="area" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
+    </resultMap>
+
+    <select id="selectAllUsers" resultMap="user">
+        select * from user
+    </select>
+
+    <select id="login_verify" resultMap="user">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+
+    <insert id="insertUser" parameterType="com.ericxxt.logistics_system.entity.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="phoneNum != null">
+                phoneNum,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+            #{username,jdbcType=VARCHAR},
+        </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                #{phoneNum,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="show_province" resultType="java.lang.String">
+        select distinct province from location
+    </select>
+
+    <select id="show_cities" resultType="java.lang.String">
+        select distinct city from location where province=#{province}
+    </select>
+
+    <select id="show_areas" resultType="java.lang.String">
+        select area from location where city=#{city}
+    </select>
+
+
+
+    <!--<insert id="insert" parameterType="com.example.entity.User">
+        insert into User (userId, userName, phone,
+        sex)
+        values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.entity.User">
+        insert into User
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="username != null">
+                userName,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findAllUser" resultType="com.example.entity.User">
+        select * from User
+    </select>-->
+</mapper>

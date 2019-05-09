@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ericxxt.logistics_system.dao.DeliverDao">
+
+    <resultMap id="deliver" type="com.ericxxt.logistics_system.entity.Deliver">
+        <result column="deliver_id" jdbcType="INTEGER" property="deliver_id" />
+        <result column="deliver_name" jdbcType="VARCHAR" property="deliver_name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="news" jdbcType="VARCHAR" property="news" />
+        <result column="orderNum" jdbcType="VARCHAR" property="orderNum" />
+        <result column="salary" jdbcType="VARCHAR" property="salary" />
+        <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
+        <result column="repository" jdbcType="VARCHAR" property="repository" />
+    </resultMap>
+    <update id="update_order">
+        update orders set status=#{status},volume=#{volume},trans_info=#{trans_info} where order_id=#{order_id}
+    </update>
+
+
+    <update id="finish_time">
+        update orders set live_time=#{live_time} where order_id=#{order_id}
+    </update>
+
+    <select id="login_verify" resultMap="deliver">
+        select * from deliver where deliver_name=#{deliver_name} and password=#{password}
+    </select>
+
+    <!--<insert id="insert" parameterType="com.example.entity.User">
+        insert into User (userId, userName, phone,
+        sex)
+        values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.entity.User">
+        insert into User
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="username != null">
+                userName,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findAllUser" resultType="com.example.entity.User">
+        select * from User
+    </select>-->
+</mapper>
