@@ -30,14 +30,18 @@ public class UserController {
     public String mainpage(HttpServletRequest request){
 //        User user=userService.selectAllUsers();
 //        request.getSession().setAttribute("user",user);
+
         return "index";
     }
 
     //跳转登录界面
     @RequestMapping("/to_login")
-    public String to_login(Model model){
+    public String to_login(HttpServletRequest request,Model model){
         List<String> provinces=userService.show_provinces();
         model.addAttribute("provinces",provinces);
+        if(request.getSession().getAttribute("insert_result")!=null){
+            request.getSession().removeAttribute("insert_result");
+        }
         return "user_login";
     }
 
@@ -61,8 +65,9 @@ public class UserController {
         int insert_result=userService.insertUser(user);
         if(insert_result<1){
             request.getSession().setAttribute("insert_result","注册失败");
+        }else {
+            request.getSession().setAttribute("insert_result", "注册成功");
         }
-        request.getSession().setAttribute("insert_result","注册成功");
         return "redirect:/user/to_login";
     }
     //log out
@@ -85,6 +90,7 @@ public class UserController {
     @RequestMapping("/order_query")
     public Order order_query(@RequestParam String order_id,Model model){
         Order order=orderService.selectOrder(Integer.parseInt(order_id));
+        order.setLive_time(PackMethods.time_change(order.getInitial_time()));
         return order;
     }
     //查询订单页面
@@ -96,6 +102,7 @@ public class UserController {
         User user= (User) request.getSession().getAttribute("user");
         List<Order> orders=orderService.user_Orders(user.getUser_id());
         ArrayList<ArrayList<Order>> classed_lists=packMethods.user_classed_order(orders,user.getUser_id());
+        System.out.println("yemian:"+user.getUser_id());
         model.addAttribute("ing_orders",classed_lists.get(0));
         model.addAttribute("sending_orders",classed_lists.get(1));
         model.addAttribute("finished_orders",classed_lists.get(2));

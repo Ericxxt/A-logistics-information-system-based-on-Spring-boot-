@@ -39,8 +39,8 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i><#if Session["manager"]?exists>${Session.manager.manager_name}</#if></a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
+                    <#--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>-->
+                    <#--</li>-->
                     <li class="divider"></li>
                     <li><a href="/manager/log_out"><i class="fa fa-sign-out fa-fw"></i>退出</a>
                     </li>
@@ -62,7 +62,10 @@
                     <a href=# id="nav1" ><i class="fa fa-desktop"></i> 待审核订单</a>
                 </li>
                 <li class="nav1">
-                    <a href=# id="nav1" ><i class="fa fa-bar-chart-o"></i> 进行中订单</a>
+                    <a href=# id="nav1" ><i class="fa fa-tablet"></i> 进行中订单</a>
+                </li>
+                <li class="nav1">
+                    <a href=# id="nav1" ><i class="fa fa-bar-chart-o"></i> 本月财务状况</a>
                 </li>
 
 
@@ -188,13 +191,13 @@
                                                 <td>${uo.initial_time}</td>
                                                 <td>
                                                     <div class="form-group form-inline">
-                                                        <select class="col-md-6" name="deliver_province" id="deliver_province">
+                                                        <select class="col-md-6 deliver_province" name="deliver_province">
                                                             <option>-省份-</option>
                                                             <#list provinces as pr>
                                                                 <option value="${pr}">${pr}</option>
                                                             </#list>
                                                         </select>
-                                                        <select class="col-md-6" name="deliver" id="deliver">
+                                                        <select class="col-md-6 deliver" name="deliver" >
                                                             <option>-人员-</option>
                                                         </select>
                                                     </div>
@@ -253,6 +256,16 @@
                         </div>
                     </div>
                     <!--End checked_orders -->
+                    <!-- start financial -->
+                      <div class="panel panel-default order_table" id="financial_table" style="height:400px;display: none;">
+                          <div class="input-group col-md-10" style="padding-top:15%;padding-left:30%;">
+                              <span class="input-group-addon">本月工资</span>
+                              <input type="text" id="end_place" class="form-control" readonly="readonly" value="${salary}" />
+                          </div>
+                      </div>
+
+                    <!-- start financial -->
+
                 </div>
             </div>
 
@@ -294,8 +307,9 @@
         });
 
         //select province
-        $("#deliver_province").change(function () {
+        $(".deliver_province").change(function () {
             var province=$(this).val();
+            var deliver=$(this).parent().children(".deliver");
             $.ajax({
                 type:"post",
                 url:"/manager/select_deliver",
@@ -304,10 +318,15 @@
                 success: function (delivers) {
                     // alert(data);
                 // var delivers=JSON.parse(data);
-                $("#deliver").find("option").remove();
+
+                      // alert(deliver);
+                     // alert($(this).next());
+                // $(this).parent().find("select").eq(1).find("option").remove();
+                //     $(this).parent().children(".deliver").empty();
                 if(delivers!=null){
                     $.each(delivers,function (i,n) {
-                        $("#deliver").append("<option value="+n.deliver_id+">"+n.deliver_name+","+n.deliver_id+"</option>");
+                        //ajax 域内this已经不再适用
+                        deliver.append("<option value="+n.deliver_id+">"+n.deliver_name+","+n.deliver_id+"</option>");
                     })
                 }
             }

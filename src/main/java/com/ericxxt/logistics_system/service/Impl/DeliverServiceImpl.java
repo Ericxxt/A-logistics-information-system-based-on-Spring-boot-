@@ -22,4 +22,9 @@ public class DeliverServiceImpl implements DeliverService {
     public Deliver login_verify(String deliver_name, String password) {
         return this.deliverDao.login_verify(deliver_name,password);
     }
+
+    @Override
+    public void update_Salary(int diliver_id, String salary) {
+         this.deliverDao.update_Salary(diliver_id, salary);
+    }
 }

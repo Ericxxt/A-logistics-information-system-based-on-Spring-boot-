@@ -20,10 +20,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         body{background: url("/back_img/generate.jpg") repeat;background-size: cover;}
         #form_look{
             background: rgba(255,255,255,0.2);width:400px;
-            margin:100px auto;position: absolute;margin-left: 26%;margin-top: 10%;
-
+            margin:100px auto;position: absolute;margin-left: 24%;margin-top: 10%;
+            border:1px solid gray;
+            border-radius: 3px 3px 3px 3px;
+            width: 350px;
+            height: 320px;
+            padding-left: 20px;
         }
         #form_submit{
+            padding-left: 20px;
+            border: 1px solid gray;
+            border-radius: 3px 3px 3px 3px;
             background: rgba(255,255,255,0.2);width:400px;margin:100px auto;position: absolute;margin-left: 55%;margin-top: 10%;
 
         }
@@ -32,6 +39,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
         #form_submit .form-group{
             margin-top: 5px;
+        }
+        #order_type{
+            width: 70px;
+            margin-left: 12px;
         }
         </style>
 </head>
@@ -69,8 +80,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </#if>
                         </ul>
                         </li>
-                        <#--<li><a href="blog.html">Blog</a></li>-->
-                        <#--<li><a href="contact.html">Contact</a></li>-->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -137,17 +146,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <span class="input-group-addon">物品名称</span>
                 <input class="form-control" type="text"  name="order_name" />
             </div>
-            <div class="form-group radio-inline">
-                <div class="col-md-12">
-                <span class="input-group">商品类型</span>
-
-                <input class="form-control" type="radio" value="文件" name="order_type"/>文件
-                <input class="form-control" type="radio" value="包裹" name="order_type"/>包裹
-                <input class="form-control" type="radio" value="物品" name="order_type"/>物品
-                <input class="form-control" type="radio" value="易碎品" name="order_type"/>易碎品
-                </div>
+            <div class="form-group input-group">
+                <#--<div class="col-md-12">-->
+                <span class="input-group-addon">商品类型</span>
+                    <select class="form-group col-md-4" id="order_type" name="order_type">
+                        <option value="文件">文件</option>
+                        <option value="包裹">包裹</option>
+                        <option value="物品">物品</option>
+                        <option value="易碎品">易碎品</option>
+                    </select>
+                <#--<input class="form-control" type="radio" value="文件" name="order_type"/>文件-->
+                <#--<input class="form-control" type="radio" value="包裹" name="order_type"/>包裹-->
+                <#--<input class="form-control" type="radio" value="物品" name="order_type"/>物品-->
+                <#--<input class="form-control" type="radio" value="易碎品" name="order_type"/>易碎品-->
+                <#--</div>-->
             </div>
-
+                <br/>
             <div class="form-group pull-right" style="margin-top: 30px;">
                 <input type="submit" class="btn btn-success pull-right" value="创建"/>
             </div>

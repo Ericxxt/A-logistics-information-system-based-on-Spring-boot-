@@ -55,7 +55,7 @@ public class Order {
         this.trans_info = trans_info;
     }
 
-    public Order(String order_name, String order_type, int sender_id, String sender_name, String sender_province, String sender_city, String sender_area, String sender_address, String sender_phone, int receiver_id, String receiver_name, String receiver_province, String receiver_city, String receiver_area, String receiver_address, String receiver_phone) {
+    public Order(String order_name, String order_type, int sender_id, String sender_name, String sender_province, String sender_city, String sender_area, String sender_address, String sender_phone, int receiver_id, String receiver_name, String receiver_province, String receiver_city, String receiver_area, String receiver_address, String receiver_phone,String price) {
         this.order_name = order_name;
         this.order_type = order_type;
         this.sender_id = sender_id;
@@ -72,6 +72,7 @@ public class Order {
         this.receiver_area = receiver_area;
         this.receiver_address = receiver_address;
         this.receiver_phone = receiver_phone;
+        this.price=price;
     }
 
     public int getOrder_id() {

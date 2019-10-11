@@ -98,7 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <th>收件人手机号</th>
                 <th>订单状态</th>
                 <th>时间信息</th>
-                <th>配送信息</th>
+                <#--<th>配送信息</th>-->
             </tr>
             </thead>
             <tbody>
@@ -107,6 +107,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </tr>
             </tbody>
         </table>
+        <div class="col-lg-6 input-group center-block">
+        <span id="trans_span" class="input-group-addon">运输信息:</span>
+            <input class="form-control" readonly="readonly" type="text" id="transInfos" />
+            <#--<input type="hidden" id="arrow" value="">-->
+        </div>
+
     </div>
 
 </div>
@@ -119,26 +125,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- main slider-banner -->
 <script type="text/javascript" src="/js/jquery.mkinfinite.js"></script>
 <script type="text/javascript">
-    // $(document).ready(function(){
-    //
-    // });
-    //
-    //
-    // $('.w3layouts-slider').mkinfinite({
-    //     maxZoom:       1.4,
-    //     animationTime: 4000,
-    //     imagesRatio:   (960 / 720),
-    //     isFixedBG:     true,
-    //     zoomIn:        true,
-    //     imagesList:    new Array(
-    //         '/images/al.jpg',
-    //         '/images/22.jpg',
-    //         '/images/car.jpg',
-    //         '/images/44.jpg',
-    //         '/images/55.jpg'
-    //     )
-    // });
-    // });
 </script>
 <!-- //main slider-banner -->
 <!-- what we do hover effect -->
@@ -148,22 +134,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $('#sti-menu').iconmenu();
         $("#query").click(function () {
             var order_id=$("#order_id").val();
-
+            $(".col-md-12").css("display","none");
             $.ajax({
                 type:"post",
                 url:"/user/order_query",
                 data:"order_id="+order_id,
                 dataType:"json",
                 success: function (order) {
+                    $("#dataTables-example tbody tr td").remove();
                     $(".col-md-12").css("display","block");
                   $("#dataTables-example tbody tr").append(
                       "<td>"+order.order_id+"</td><td>"
                       +order.order_name+"</td><td>"+order.sender_province+order.sender_city+"<span class='glyphicon glyphicon-arrow-right'>"+order.receiver_province+order.receiver_city
                       +"</td><td>"+order.sender_name+"</td><td>"+order.sender_phone
                       +"</td><td>"+order.receiver_name+"</td><td>"+order.receiver_phone
-                      +"</td><td>"+order.status+"</td><td>"+order.initial_time+" 时长："+order.live_time+"</td><td>"+order.trans_info+"</td>");
+                      +"</td><td>"+order.status+"</td><td>"+order.initial_time+" 时长："+order.live_time+"</td>");
+                      <#--+-->
+                      <#--<#list order.trans_info?split(",") as singleInfo>-->
+                      <#--singleInfo+"<span class='glyphicon glyphicon-arrow-right'>"-->
+                          <#--</#list>-->
+
+                      <#--+"</td>");-->
+                    var arr=new Array();
+                    arr=order.trans_info.split("，");
+                    // $("#trans_span").append(
+                    //     " <input class='form-control' readonly='readonly' type='text' id='transInfos' value='"+"/>"
+                    // )
+                    //
+                    var retrans="";
+                    for(var i=0;i<arr.length;i++){
+                        if(i==arr.length-1){
+                            retrans=retrans+arr[i];
+                            // $("#transInfos").val(retrans);
+                            // $("#transInfos").html("<span class='glyphicon glyphicon-arrow-right' />");
+                            //     retrans=$("#transInfos").val();
+                        }else {
+                            retrans = retrans + arr[i] + " -> ";
+                            // retrans = retrans + arr[i] + "<span class='glyphicon glyphicon-arrow-right' />";
+                        }
+                    }
+                    // retrans.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+                // <span class='glyphicon glyphicon-arrow-right' />
+
+                    $("#transInfos").val(retrans);
+
+                    // alert($("#arrow").text());
+                    // var arr=order.trans_info.split(",");
+                    // $.each(arr,function (index,i) {
+                    //         $("#transInfos").val(i+"<span class='glyphicon glyphicon-arrow-right'>");
+
+
+                    //
+                    // })
+
+
+                    <#--$("#transInfos").val(<#list order.trans_info?split(",") as singleInfo>-->
+                        <#--<#if !singleInfo_has_next>-->
+                        <#--singleInfo-->
+                    <#--<#else>-->
+                    <#--singleInfo+"<span class='glyphicon glyphicon-arrow-right'>"-->
+                    <#--</#if>-->
+                    <#--</#list>);-->
                 }
             });
+
+
         });
     });
 </script>
@@ -172,14 +207,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript">
     $(document).ready(function() {
 
-        /*
-            var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-            };
-        */
+
 
         $().UItoTop({ easingType: 'easeOutQuart' });
 
@@ -189,11 +217,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="/js/move-top.js"></script>
 <script type="text/javascript" src="/js/easing.js"></script>
 <script type="text/javascript">
-    // jQuery(document).ready(function($) {
-    //     $(".scroll").click(function(event){
-    //         event.preventDefault();
-    //         $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-    //     });
-    // });
+
 </script>
 </html>

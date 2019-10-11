@@ -13,4 +13,6 @@ public interface ManagerService {
     public void update_news(int deliver_id);
     public List<String> deliver_provinces();
     public List<Deliver> select_order_delivers(String province);
+    public void update_Salary(int manager_id,String salary);
+    public String return_salary(int manager_id);
 }

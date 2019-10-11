@@ -59,6 +59,15 @@
     <select id="deliver_provinces" resultType="java.lang.String">
       select distinct province from deliver
     </select>
+
+
+    <update id="update_Salary">
+        update manager set salary=#{param2} where manager_id=#{param1}
+    </update>
+
+    <select id="return_salary" resultType="java.lang.String">
+      select salary from manager where manager_id=#{manager_id}
+    </select>
     <!--<insert id="insert" parameterType="com.example.entity.User">
         insert into User (userId, userName, phone,
         sex)

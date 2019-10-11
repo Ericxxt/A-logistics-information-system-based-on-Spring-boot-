@@ -54,8 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  </#if>
 					  </ul>
 					</li>
-					<#--<li><a href="blog.html">Blog</a></li>-->
-					<#--<li><a href="contact.html">Contact</a></li>-->
+
 				  </ul>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -157,36 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- footer -->
 	<footer>
 	<div class="agileinfo-footer">
-		<#--<div class="container">-->
-			<#--<div class="agileits-footer-top">-->
-					<#--<div class="col-sm-4 w3ls-address-grid">-->
-							<#--<i class="glyphicon glyphicon-map-marker"></i>-->
-							<#--<div class="w3-address1">-->
-								<#--<h6>Address</h6>-->
-								<#--<p>Lorem ipsum dolor,-->
-								<#--TL 19034-88974</p>-->
-							<#--</div>-->
-							<#--<div class="clearfix"> </div>-->
-						<#--</div>-->
-						<#--<div class="col-sm-4 w3ls-address-grid">-->
-							<#--<i class="glyphicon glyphicon-phone"></i>-->
-							<#--<div class="w3-address1">-->
-							<#--<h6>Phone</h6>-->
-								<#--<p>+123456789</p>-->
-							<#--</div>-->
-							<#--<div class="clearfix"> </div>-->
-						<#--</div>-->
-						<#--<div class="col-sm-4 w3ls-address-grid">-->
-							<#--<i class="glyphicon glyphicon-envelope"></i>-->
-							<#--<div class="w3-address1">-->
-							<#--<h6>Email</h6>-->
-								<#--<p><a href="mailto:info@example.com"> mail@example.com</a></p>-->
-							<#--</div>-->
-							<#--<div class="clearfix"> </div>-->
-						<#--</div>-->
-						<#--<div class="clearfix"> </div>-->
-				<#--</div>-->
-				<#--</div>-->
+
 			<div class="agileits-footer-bottom">
 				<div class="container center-block">
 					<p class="footer-class">Copyright &copy; 2017.版权属于速通@公司.</p>

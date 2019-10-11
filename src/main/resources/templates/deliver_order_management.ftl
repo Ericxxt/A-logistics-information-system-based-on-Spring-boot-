@@ -39,8 +39,6 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i><#if Session["deliver"]?exists>${Session.deliver.deliver_name}</#if></a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
                     <li class="divider"></li>
                     <li><a href="/deliver/log_out"><i class="fa fa-sign-out fa-fw"></i>退出</a>
                     </li>
@@ -62,7 +60,10 @@
                     <a href=# id="nav1" ><i class="fa fa-desktop"></i> 未接收订单</a>
                 </li>
                 <li class="nav1">
-                    <a href=# id="nav1" ><i class="fa fa-bar-chart-o"></i> 配送中</a>
+                    <a href=# id="nav1" ><i class="fa fa-tablet"></i>配送中订单</a>
+                </li>
+                <li class="nav1">
+                    <a href=# id="nav1" ><i class="fa fa-bar-chart-o"></i> 本月财务状况</a>
                 </li>
 
 
@@ -238,7 +239,11 @@
                                                 <td><input class="btn btn-info" type="submit" value="提交"></td>
                                                 <input type="hidden" name="checked_volume" value="${co.volume}" />
                                                     <input type="hidden" name="checked_initial_time" value="${co.initial_time}" />
+                                                <input type="hidden" name="manager_id" value="${co.manager_id?c}" />
+                                                <input type="hidden" name="price" value="${co.price}" />
+
                                             </tr>
+
                                     </form>
                                     </#list>
                                     </#if>
@@ -250,6 +255,16 @@
                         </div>
                     </div>
                     <!--End checked_orders -->
+
+                    <!-- start financial -->
+                    <div class="panel panel-default order_table" id="financial_table" style="height:400px;display: none;">
+                        <div class="input-group col-md-10" style="padding-top:15%;padding-left:30%;">
+                            <span class="input-group-addon">本月工资</span>
+                            <input type="text" id="end_place" class="form-control" readonly="readonly" value="${salary}" />
+                        </div>
+                    </div>
+                    <!-- start financial -->
+
                 </div>
             </div>
 

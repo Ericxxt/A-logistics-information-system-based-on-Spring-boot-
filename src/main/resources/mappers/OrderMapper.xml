@@ -40,7 +40,7 @@
 
     <select id="user_Orders" resultMap="order">
         select order_id, order_name, order_type, sender_id, sender_name, sender_province, sender_city, sender_area, sender_address, sender_phone, receiver_id, receiver_name, receiver_province, receiver_city, receiver_area, receiver_address, receiver_phone, manager_id, deliver_id, DATE_FORMAT(initial_time,'%Y-%m-%d %H:%i:%s') as initial_time, live_time, status, price, volume, trans_info
-         from orders where sender_id=#{user_id}
+         from orders where sender_id=#{user_id} or receiver_id=#{user_id}
     </select>
 
     <select id="unview_Orders" resultMap="order">
@@ -131,6 +131,9 @@
             <if test="receiver_phone != null">
                 receiver_phone,
             </if>
+              <if test="price != null">
+                  price,
+            </if>
 
 
         </trim>
@@ -187,6 +190,9 @@
             </if>
             <if test="_parameter != null">
                 #{receiver_phone,jdbcType=VARCHAR},
+            </if>
+              <if test="_parameter != null">
+                #{price,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

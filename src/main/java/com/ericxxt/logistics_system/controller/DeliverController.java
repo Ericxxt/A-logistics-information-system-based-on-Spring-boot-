@@ -6,6 +6,7 @@ import com.ericxxt.logistics_system.entity.Manager;
 import com.ericxxt.logistics_system.entity.Order;
 import com.ericxxt.logistics_system.packmethods.PackMethods;
 import com.ericxxt.logistics_system.service.DeliverService;
+import com.ericxxt.logistics_system.service.ManagerService;
 import com.ericxxt.logistics_system.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -37,6 +38,7 @@ public class DeliverController {
         model.addAttribute("unhandled_orders",classed_lists.get(0));
         model.addAttribute("checked_orders",classed_lists.get(1));
         model.addAttribute("finished_orders",classed_lists.get(2));
+        model.addAttribute("salary",deliver.getSalary());
         return "deliver_order_management";
     }
 
@@ -51,13 +53,32 @@ public class DeliverController {
         return "redirect:/deliver/to_deliver_order_management";
     }
 
+    @Autowired
+    private ManagerService managerService;
     //更新运输中的订单信息
     @RequestMapping("/update_order")
-    public String update_order(@RequestParam String checked_order_id
+    public String update_order(HttpServletRequest request,@RequestParam String checked_order_id
             ,@RequestParam String checked_status,@RequestParam String checked_initial_time
-            , @RequestParam String checked_volume,@RequestParam String checked_trans_info){
+            , @RequestParam String checked_volume,@RequestParam String checked_trans_info
+            ,@RequestParam String manager_id,@RequestParam String price){
+        //将完成订单的时间设置为终结时间，时间不再改变
         if("完成".equals(checked_status)){
                 deliverService.finish_time(Integer.parseInt(checked_order_id),packMethods.time_change(checked_initial_time));
+                double order_price=Integer.parseInt(price);
+            //配送员更新工资情况
+            Deliver deliver= (Deliver) request.getSession().getAttribute("deliver");
+            double deliver_before_salary=Double.parseDouble(deliver.getSalary());
+                //提成占订单总额的百分之二
+            System.out.println(order_price*0.2+deliver_before_salary+"");
+                deliverService.update_Salary(deliver.getDeliver_id(),order_price*0.2+deliver_before_salary+"");
+
+            //管理员更新工资情况
+            double manager_salary=Double.parseDouble(managerService.return_salary(Integer.parseInt(manager_id)));
+            //提成占订单总额的百分之四
+            System.out.println(order_price*0.4+manager_salary+"");
+            managerService.update_Salary(Integer.parseInt(manager_id),order_price*0.4+manager_salary+"");
+
+
         }
         deliverService.update_order(Integer.parseInt(checked_order_id),checked_status,checked_volume,checked_trans_info);
         return "redirect:/deliver/to_deliver_order_management";

@@ -45,6 +45,7 @@ public class ManagerController {
         model.addAttribute("unview_orders",unview_orders);
         model.addAttribute("checked_orders",classed_lists.get(1));
         model.addAttribute("finished_orders",classed_lists.get(2));
+        model.addAttribute("salary",manager.getSalary());
         return "manager_order_management";
     }
     //将待分配订单进行处理

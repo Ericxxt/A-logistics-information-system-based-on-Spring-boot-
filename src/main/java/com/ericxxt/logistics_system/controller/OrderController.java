@@ -43,11 +43,21 @@ public class OrderController {
         if("".equals(receiver_id)){
             receiver_id="0000";
         }
+        String order_price="0";
+        if("文件".equals(order_type)){
+            order_price="12";
+        }else if ("物品".equals(order_type)){
+            order_price="20";
+        }else if("包裹".equals(order_type)){
+            order_price="25";
+        }else if("易碎品".equals(order_type)){
+            order_price="35";
+        }
         User user= (User) request.getSession().getAttribute("user");
         Order order =new Order(order_name,order_type,user.getUser_id(),user.getUsername()
                 ,user.getProvince(),user.getCity(),user.getArea(),user.getAddress()
         ,user.getPhoneNum(),Integer.parseInt(receiver_id),receiver_name,receiver_province,receiver_city
-        ,receiver_area,receiver_address,receiver_phone);
+        ,receiver_area,receiver_address,receiver_phone,order_price);
         int insert_result=orderService.insertOrder(order);
         if(insert_result<1){
             //这里需要session认证

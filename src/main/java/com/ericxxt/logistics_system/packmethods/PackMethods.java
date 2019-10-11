@@ -9,9 +9,11 @@ import java.util.List;
 
 public class PackMethods {
 
-    public static String time_change(String initial_time){
-//        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    //        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        String initial_one=
+
+    public static String time_change(String initial_time){
+
         Timestamp ts1=Timestamp.valueOf(initial_time);
         Timestamp ts2=new Timestamp(System.currentTimeMillis());
         long timed=(ts2.getTime()-ts1.getTime())/1000;
@@ -33,10 +35,12 @@ public class PackMethods {
         ArrayList<Order> sending_orders=new ArrayList<>();
         ArrayList<Order> finished_orders=new ArrayList<>();
         for(Order order:orders){
+            System.out.println("user_id:"+user_id+",order_user_id:"+order.getReceiver_id());
             if("完成".equals(order.getStatus())){
                 order.setLive_time(time_change(order.getInitial_time()));
                 finished_orders.add(order);
             }else if(user_id==order.getReceiver_id()){
+                System.out.println("user_id:"+user_id+",order_user_id:"+order.getReceiver_id());
                 ing_orders.add(order);
             }else {
                 sending_orders.add(order);

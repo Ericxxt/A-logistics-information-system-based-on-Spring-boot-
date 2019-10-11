@@ -48,4 +48,15 @@ public class ManagerServiceImpl implements ManagerService {
     public List<Deliver> select_order_delivers(String province) {
         return this.managerDao.select_order_delivers(province);
     }
+
+    @Override
+    public void update_Salary(int manager_id, String salary) {
+            this.managerDao.update_Salary(manager_id,salary);
+    }
+
+    @Override
+    public String return_salary(int manager_id) {
+        return this.managerDao.return_salary(manager_id);
+    }
+
 }
